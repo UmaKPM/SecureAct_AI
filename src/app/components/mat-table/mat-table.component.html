@@ -1,0 +1,26 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="sno">
+      <th mat-header-cell *matHeaderCellDef> <span class="head-text"><b>S No.</b></span> </th>
+      <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="reportname">
+      <th mat-header-cell *matHeaderCellDef><span class="head-text"><b>Report Name</b></span>  </th>
+      <td mat-cell *matCellDef="let element"> {{element.reportname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>  <span class="head-text"><b>View &nbsp;&nbsp;/ &nbsp;&nbsp;Download</b></span> </th>
+        <td mat-cell *matCellDef="let element">
+            <a mat-button role="button" (click)="viewreport(element.reportname)">  <mat-icon matTooltip="View Report" matTooltipPosition="left">visibility</mat-icon></a>
+             / 
+             <a mat-button role="button" (click)="downloadreport(element.reportname)">  <mat-icon matTooltip="Download Report" matTooltipPosition="right">get_app</mat-icon> </a> </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

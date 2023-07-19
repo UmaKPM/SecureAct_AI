@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Customize your train dataset</h1>
+<div mat-dialog-content>
+    <section>
+        <div>
+          <mat-selection-list (selectionChange)="selChange($event, checkList.selectedOptions.selected)" #checkList >
+            <mat-list-option *ngFor="let item of data" >{{item}}</mat-list-option>
+            <!-- <mat-list-option selected>ID</mat-list-option>
+            <mat-list-option selected>INCOME</mat-list-option>
+            <mat-list-option>SEX</mat-list-option>
+            <mat-list-option>EDUCATION</mat-list-option>
+            <mat-list-option selected>AGE</mat-list-option>
+            <mat-list-option selected>CONTRIBSOURCE_0</mat-list-option>
+            <mat-list-option>EXCONTRIB1</mat-list-option>
+            <mat-list-option>EXCONTRIB3</mat-list-option> -->
+          </mat-selection-list>
+        </div>
+      </section>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close]="selection">Continue</button>
+</div>

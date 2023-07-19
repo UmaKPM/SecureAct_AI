@@ -1,0 +1,730 @@
+<div class="spinner_overlay" *ngIf="showSpinner">
+  <mat-spinner ></mat-spinner>
+</div>
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <!--img src="assets/img/Picture1.png" alt=""-->&nbsp;<span>Secure Act 2.0 AI validator</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>search</mat-icon>
+  </button>
+  <!--button mat-button >Workspaces</button>
+  <button mat-button [matMenuTriggerFor]="menu">Library
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button-->
+<mat-menu #menu="matMenu">
+<button mat-menu-item>Item 1</button>
+<button mat-menu-item>Item 2</button>
+</mat-menu>
+<button mat-button >Help</button>
+  <button mat-button [matMenuTriggerFor]="menu">Settings
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+<mat-menu #menu="matMenu">
+<button mat-menu-item>Item 1</button>
+<button mat-menu-item>Item 2</button>
+</mat-menu>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <!--mat-list>
+      <mat-list-item><a href="#">Resources</a></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><a href="#">Regulations</a></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><a href="#">Industry Benchmarks</a></mat-list-item>
+    </mat-list-->
+  </mat-drawer>
+  <mat-drawer-content>
+<!-- </p> -->
+<mat-stepper labelPosition="bottom" #stepper (selectionChange)="onStepChange($event)">
+<!--mat-step state="source" >
+  <form [formGroup]="firstFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Data Source</p>
+    </ng-template>
+    <br/><br/><br/>  
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="card card-full-height">
+            <div class="card-body">
+              <h5 class="card-title text-center"></h5>
+              <div style="text-align: center;">
+              <section>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Datasource</mat-label>
+                  <mat-select (selectionChange)="dataSelected($event.value)" #sourceSelect>
+                    <mat-option value="one">System of records</mat-option>
+                    <mat-option value="two">System of engagement </mat-option>
+                    <mat-option value="three">Multiple Data sources </mat-option>
+                    <mat-option value="four">Other sources </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select storage source</mat-label>
+                  <mat-select>
+                    <mat-option value="one">S3</mat-option>
+                    <mat-option value="two">Others</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-checkbox [checked]= "true" color = "primary" > 
+                  <label>Data Cleanup </label> 
+              </mat-checkbox>
+              </section>
+             
+            </div>
+                <div style="text-align: center;"> 
+                
+                   <section *ngIf="canShowRadio">
+                    <mat-radio-group aria-label="Select an option" (change)="radioChange($event.value)">
+                      <mat-radio-button value="1">OMNI</mat-radio-button>
+                      <mat-radio-button value="2">ODS</mat-radio-button>
+                      <mat-radio-button value="3">Other Sources</mat-radio-button>
+
+                    </mat-radio-group>
+                   </section>
+                   <section *ngIf="showUpload">
+                     <h3>Data Uploaded to <a href="javascript:void(0)">@//s3:buckets/4dintelligencemodel?
+                     </a></h3>
+                   </section>
+                  <section class="cta-load">
+                    <button  mat-raised-button color="primary" (click)="openSnackBar('Data uploaded successfully','blue-snackbar')" [disabled]="!sourceSelect.value">Load Data</button>
+
+                  </section>
+                  <section *ngIf="showMessage">
+                    <p class="msg-h3">Data uploaded successfully!</p>
+                  </section>
+				<br/><br/><br/><br/>
+                </div>
+              </div>
+              </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Quick Steps</h1>
+                <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                  <section>
+                    <mat-list>
+                    <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Select the Datasource to load.</mat-list-item>
+                    <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Upload the Participant data </mat-list-item>
+                    <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Load Data for cleanup</mat-list-item>
+                   </mat-list>
+                  </section>
+                 </div>
+                
+                </div>
+                </div>
+          </div>
+          <div class="col-lg-1">
+            
+          </div>
+          </div>
+          <div class="action-btns">
+            <button class="next-btn" mat-fab color="primary" matStepperNext>
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+          </section>
+    
+  </form>
+</mat-step-->
+
+<!--mat-step  state="group">
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Define Group</p></ng-template>
+      <section class="section">
+        <br/><br/><br/>  
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Select Fields for Data Segmentation</h1>
+                <div class="declare-div">
+                    <div class="unselected border-warning">
+                      <h2>Available Fields</h2>
+                    <mat-chip-list
+                      class="example-chip mat-chip-list-stacked" selectable multiple>
+                      <mat-chip
+                        class="example-box"
+                        *ngFor="let item of groups" (click)="groupSelected(item)"
+                        [selected]="item.selected">
+                        {{item.name}}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                  <div class="selected border-warning">
+                    <h2>Selected Fields</h2>
+                    <mat-chip-list
+                      class="example-chip mat-chip-list-stacked">
+                      <mat-chip
+                        class="example-box selected-chip"
+                        *ngFor="let item of selectedGroups" selected
+                        (removed)="removeGroup(item)">
+                        {{item.name}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                  <section class="cta-btn">
+                    <button mat-raised-button color="primary" matStepperNext [disabled]="selectedGroups.length == 0">Validate</button>
+                  </section>
+                  <section class="view-data">
+                    <a href="javascript:void(0)" (click)="viewData()">View Data</a>
+                  </section>
+				  <br/><br/><br/><br/>
+                  </div>
+                  
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card card-full-height">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Quick Steps</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Select the grouping element to segregate </mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Group the data to get Financial Health</mat-list-item>
+					  <mat-list-item>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index</mat-list-item>
+                     </mat-list>
+                    </section>
+                   </div>
+                  
+                  </div>
+                  </div>
+            </div>
+            <div class="col-lg-1"></div>
+            </div>
+            </section>
+   
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-step-->
+<mat-step  state="report">
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Assessment Checker</p></ng-template>
+      <br/><br/><br/>  
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Available Recommendation Catalogue</h1>
+                <div class="declare-div" style="width: 100%;">
+                  <section>
+                    <div style="width: 100%;">
+                      <app-recomm-cata-table></app-recomm-cata-table>
+                    </div>
+                  </section>
+                </div>   
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card card-full-height">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Quick Steps</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Choose the Recommendation here</mat-list-item>
+                      <!--mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Upload Participant data </mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Load Data for cleanup</mat-list-item-->
+                     </mat-list>
+                    </section>
+                   </div>
+                  
+                  </div>
+                  </div>
+            </div>
+            <div class="col-lg-1"></div>
+            </div>
+            </section>
+    
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-step>
+
+<mat-step  state="bench">
+  <!--mat-card-title>Validate Secure Act Provisions</mat-card-title-->
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Validate Secure Act Provisions</p></ng-template>
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Select the Provision to Validate</h1>
+                <div style="text-align: center;">
+                  <section>
+                    <button mat-icon-button color="primary" class="add-bench" (click)="openRemoveBenchMark()"
+                    matTooltip="Remove benchmark" #tooltip="matTooltip" matTooltipPosition="left">
+                      <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Select </mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let item of benchMarks" value="{{item.value}}">{{item.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <button mat-icon-button color="primary" class="add-bench" (click)="openAddBenchMark()"
+                    matTooltip="Add benchmark" #tooltip="matTooltip" matTooltipPosition="right">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </section></div>
+
+                  <div class="declare-div">
+                    <h1 class="card-title text-center">Select Fields</h1>
+                    
+                    <!--div class="unselected border-warning">
+                      <h2>E Provisions</h2>
+                      <mat-chip-list
+                        class="example-chip mat-chip-list-stacked" selectable multiple>
+                        <mat-chip
+                          class="example-box "
+                          *ngFor="let item of marks" selected (click)="markSelected(item)"
+                          [selected]="item.selected">
+                          {{item.name}}
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div-->
+                    <div class="unselected border-warning">
+                      <h2>Availed Provisions</h2>
+                      <mat-chip-list
+                        class="example-chip mat-chip-list-stacked" selectable multiple>
+                        <mat-chip
+                          class="example-box "
+                          *ngFor="let item of marks" selected
+                          (removed)="removeBenchMark(item)">
+                          {{item.name}}
+                          <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div>
+
+                    <!--div class="selected border-warning mt-20" *ngIf="selectedMark && selectedMark.length">
+                      <mat-chip-list
+                        class="example-chip mat-chip-list-stacked">
+                        
+                        <ng-container *ngFor="let item of selectedMark">
+                          
+                          <input type="text" class="form-control text-col" maxlength="4" placeholder="Enter {{item.name}}">
+                        
+                        </ng-container>
+                      
+                      </mat-chip-list>
+                    </div-->
+
+                    <!--section class="cta-btn">
+                      <button mat-raised-button color="primary" (click)="openSnackBar('Data Trained successfully','blue-snackbar')" [disabled]=" selectedMark.length == 0">Validate Provisions</button>
+                    </section-->
+                    
+                  <section class="view-data">
+                    <a href="javascript:void(0)" (click)="viewData()">View Other Provisions</a>
+                  </section>
+                  <!--section *ngIf="showMessage">
+                    <p class="msg-h3">Data Trained successfully!</p>
+                  </section-->
+                  </div>
+                  
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card card-full-height">
+                <section>
+                  <mat-list>
+                 <b> &nbsp;&nbsp;&nbsp;&nbsp;Overall Status :  Implemented 6 out of 64 Provisions </b>
+                 <br/>
+                  </mat-list>
+                </section>
+                <div class="card-body">
+                  <h1 class="card-title text-center">Next Best Action</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">    
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; RMD Change in BRMS rule from 70 .5 to 72</mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Enhancements to the age 50+ catch-up provisions </mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Online lost and found for long-forgotten pension benefits</mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;CITS(Independent of bill passage)</mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Merging 401(a) and 403(b) Plans</mat-list-item>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp;Rollovers by non-spousal beneficiaries </mat-list-item>
+                      </mat-list>
+                    </section>
+                   </div>
+                  
+                  </div>
+                  </div>
+            </div>
+            </div>
+            </section>
+   
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+<!--/mat-card-title-->
+</mat-step>
+<!--mat-step  state="test">
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Test Model </p></ng-template>
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Available Trained Models</h1>
+                <div class="declare-div">
+                  <br/><br/><br/><br/>
+                  <section>
+                    <button mat-raised-button color="primary">Available Models</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-form-field appearance="fill">
+                      <mat-label>View Models</mat-label>
+                      <mat-select #viewModel>
+                        <mat-option *ngFor="let item of reports" value="{{item.value}}">{{item.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button mat-raised-button color="primary" (click)="downloadFile(viewModel)" [disabled]="!viewModel.value">Go</button>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                  </section>
+                  </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card card-full-height">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Quick Steps</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Select the Available models to test</mat-list-item>
+                     </mat-list>
+                    </section>
+                   </div>
+                  </div>
+                  </div>
+            </div>
+            <div class="col-lg-1"></div>
+            </div>
+            </section>
+   
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-step-->
+<mat-step  state="export">
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Export</p></ng-template>
+      <br/><br/><br/>  
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Export the Provisions</h1>
+                
+                <div class="declare-div">      
+                  <section>
+                    <button mat-raised-button color="primary">Export To</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-form-field appearance="fill">
+                      <mat-label>Destination Source</mat-label>
+                      <mat-select #desSelect>
+                        <mat-option *ngFor="let item of source" value="{{item.value}}">{{item.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <section class="cta-btn">
+                      <button mat-raised-button color="primary"(click)="openSnackBar('Data exported successfully','blue-snackbar', 'export')" class="btn-data" [disabled]="!desSelect.value">Export Model</button>
+                      
+                    <section *ngIf="showMessage">
+                      <p class="msg-h3">Data exported successfully!</p>
+                    </section>
+					  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </section>
+                  </section>
+                </div>
+                </div>
+                </div>
+            </div>
+            <!--div class="col-lg-4">
+              <div class="card card-full-height">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Quick Steps</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Select the datamodel to export. </mat-list-item>
+                     </mat-list>
+                    </section>
+                   </div>
+                  
+                  </div>
+                  </div>
+            </div-->
+            <div class="col-lg-1"></div>
+            </div>
+            </section>
+    
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-step>
+<!--mat-step  state="report">
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>
+      <p class="step-head">Reporting Model</p></ng-template>
+      <br/><br/><br/>  
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Secure Act 2.0 latest updates</h1>
+                
+                <div class="declare-div" style="width: 100%;">
+                  <section>
+                    <div style="width: 100%;">
+                      <app-mat-table></app-mat-table>
+                    </div>
+                  </section>
+                </div>
+                </div>
+                </div>
+            </div>
+            <!--div class="col-lg-4">
+              <div class="card card-full-height">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Quick Steps</h1>
+                  <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                    <section>
+                      <mat-list>
+                      <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Select Report to be downloaded </mat-list-item>
+                      </mat-list>
+                    </section>
+                   </div>
+                  
+                  </div>
+                  </div>
+            </div>
+            <div class="col-lg-1"></div>
+            </div>
+            </section>
+   
+    <div>
+      <button class="previous-btn" mat-fab color="primary" matStepperPrevious>
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button class="next-btn" mat-fab color="primary" matStepperNext>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-step-->
+
+<!--mat-step  state="event">
+  <ng-template matStepLabel>
+    <p class="step-head">Event Model</p></ng-template>
+    <br/><br/>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-6">
+          <div class="card card-full-height">
+            <div class="card-body">
+              <h1 class="card-title text-center">Events</h1>
+              
+              <div class="declare-div">
+                <mat-accordion>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <b>Security</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-radio-group aria-label="Select Security" >
+                      <mat-radio-button value="1">SAST</mat-radio-button>
+                      <mat-radio-button value="2">OSPA</mat-radio-button>
+                      <mat-radio-button value="3">HIPPA</mat-radio-button>
+                    </mat-radio-group>
+                        
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <b>Train Model</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                   
+                    <mat-radio-group aria-label="Select Train model" >
+                      <mat-radio-button value="1">Xgboost algortihm</mat-radio-button>
+                      <mat-radio-button value="2">Tensorflow2</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <b>Preprod batch Jobs</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                       <b>Safetynet</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel-->
+                  <!--mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                       <b>Next Best Action Recommendation Catalogue</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel-->
+                  <!--mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                       <b>Logging</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-radio-group aria-label="Select Logging" >
+                      <mat-radio-button value="1">View 100 lines log</mat-radio-button>
+                      <mat-radio-button value="2">Download full logs</mat-radio-button>
+                    </mat-radio-group>
+                  </mat-expansion-panel-->
+                <!--/mat-accordion>
+              </div>
+              </div>
+              </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-full-height">
+              <div class="card-body">
+                <h1 class="card-title text-center">Quick Steps</h1>
+                <div class="alert border-warning alert-dismissible fade show" role="alert">              
+                  <section>
+                    <mat-list>
+                    <mat-list-item> <i class="bi bi-caret-right"></i> &nbsp; Select the event model </mat-list-item>
+                    </mat-list>
+                  </section>
+                 </div>
+                
+                </div>
+                </div>
+          </div>
+          <div class="col-lg-1"></div>
+          </div>
+          </section>
+  
+  <div>
+    <button class="previous-btn" mat-fab color="primary" aria-label="Example icon button with a delete icon" matStepperPrevious>
+      <mat-icon>navigate_before</mat-icon>
+    </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-fab color="primary" (click)="stepper.reset()"><mat-icon>home</mat-icon></button>
+  </div>
+</mat-step-->
+<ng-template matStepperIcon="source">
+  <mat-icon>insert_chart_outlined</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="config">
+  <mat-icon>settings</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="group">
+  <mat-icon>group</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="bench">
+  <mat-icon>book</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="test">
+  <mat-icon>extension</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="export">
+  <mat-icon>cloud_download</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="report">
+  <mat-icon>description</mat-icon>
+</ng-template>
+<ng-template matStepperIcon="event">
+  <mat-icon>event</mat-icon>
+</ng-template>
+</mat-stepper>
+</mat-drawer-content>
+</mat-drawer-container>
+
+
+<div class="footer" #footer>
+<section class="section">
+  <div class="row">
+    <div class="col-lg-4">
+      <span style="color: aliceblue;">Terms & Conditions</span><br />
+      <span style="color: aliceblue;">@ 2022 Copyright:</span>
+      <span style="color: white;"> Secure Act 2.0 AI validator <sup>TM</sup></span>
+    </div>
+    <div class="col-lg-5"></div>
+    <div class="col-lg-3">
+      <div style="text-align: right;padding-right: 2%;">
+        <img src="assets/img/Picture1.png" alt="">&nbsp;
+          <span style="color: White;">Secure Act 2.0 AI validator <sup>TM</sup></span>
+      </div>
+    </div>
+</div>

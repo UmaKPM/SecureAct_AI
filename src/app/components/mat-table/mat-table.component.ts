@@ -1,0 +1,83 @@
+import {Component, OnInit} from '@angular/core';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+export interface PeriodicElement1 {
+  sno: number;
+  reportname: string;
+}
+
+const ELEMENT_DATA: PeriodicElement1[] = [
+{ sno:1, reportname:'Contribution Report'},
+{ sno:2, reportname:'Diversification Report'},
+{ sno:3, reportname:'Loan Report'},
+{ sno:4, reportname:'Withdrawal Report'},
+{ sno:4, reportname:'Integrated Report'}
+
+];
+const ELEMENT_DATA_1: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];
+
+@Component({
+  selector: 'app-mat-table',
+  templateUrl: './mat-table.component.html',
+  styleUrls: ['./mat-table.component.css']
+})
+export class MatTableComponent implements OnInit {
+
+ 
+  displayedColumns: string[] = ['sno', 'reportname', 'view'];
+  dataSource = ELEMENT_DATA;
+  
+  constructor() { } 
+
+  ngOnInit(): void {
+  }
+
+  viewreport(reportname: string){
+    if(reportname == "Contribution benchmark"){
+      window.open("/assets/Reports/Contributionbenchmark.pdf");
+    }else if(reportname == "Diversification benchmark"){
+      window.open("/assets/Reports/Diversificationbenchmark.pdf", '_blank');
+    }else if(reportname == "Loan benchmark"){
+      window.open("/assets/Reports/loanbenchmark.pdf", '_blank');
+    }else if(reportname == "Withdrawal benchmark"){
+      window.open("/assets/Reports/withdrawalsbenchmark.pdf", '_blank');
+    }
+  }
+
+  downloadreport(reportname: string){
+    let url="/assets/Reports/Contributionbenchmark.pdf";
+    if(reportname == "Contribution benchmark"){
+      url = "/assets/Reports/Contributionbenchmark.pdf";
+    }else if(reportname == "Diversification benchmark"){
+      url="/assets/Reports/Diversificationbenchmark.pdf";
+    }else if(reportname == "Loan benchmark"){
+      url="/assets/Reports/loanbenchmark.pdf";
+    }else if(reportname == "Withdrawal benchmark"){
+      url="/assets/Reports/withdrawalsbenchmark.pdf";
+    }
+
+    var element = document.createElement('a');
+    element.href = url;
+    element.download = url; 
+    document.body.appendChild(element);
+    element.click();
+  }
+
+}
